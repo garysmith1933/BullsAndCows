@@ -36,19 +36,23 @@ public class Main {
 
     public static void gradeAnswer() {
 
-        String answerString = String.join("", answer);
+        String answerString = String.join("", answer); // only works on arrays of strings
         System.out.println(answerString);
 
-        if (bullCount > 0 && cowCount == 0) {
-            System.out.println("Grade " + bullCount + " bull(s). The secret code is " + answerString);
+        if (cowCount == 0 && bullCount == 0) {
+            System.out.println("Grade: None. The secret code is " + answerString + ".");
+        }
+
+        else if (bullCount > 0 && cowCount == 0) {
+            System.out.println("Grade " + bullCount + " bull(s). The secret code is " + answerString + ".");
         }
 
         else if (cowCount > 0 && bullCount == 0){
-            System.out.println("Grade " + cowCount + " cow(s). The secret code is " + answerString);
+            System.out.println("Grade " + cowCount + " cow(s). The secret code is " + answerString + ".");
         }
 
         else {
-            System.out.println("Grade: None. The secret code is " + answerString);
+            System.out.println("Grade " + bullCount + " bull(s) and " + cowCount + " cow(s). The secret code is " + answerString + ".");
         }
     }
 
