@@ -56,11 +56,36 @@ public class Main {
         }
     }
 
+    public static void generateNumber(int requiredDigits) {
+        long pseudoRandomNumber = System.nanoTime();
+
+        if (requiredDigits > 10) {
+            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
+        }
+
+        StringBuilder numString = new StringBuilder();
+
+        int max = 10;
+        int min = 1;
+
+        while (numString.length() != requiredDigits) {
+            int randomNum = (int) (Math.random() * (max - min) + min);
+            numString.append(randomNum);
+            System.out.println(numString);
+        }
+
+        System.out.println(numString);
+
+        // if the number starts with 0 bring up an error
+        // all unique numbers.
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String userGuess = scanner.nextLine();
+//      String userGuess = scanner.nextLine();
+        int requiredDigits = scanner.nextInt();
 
-        checkDigits(userGuess);
-        gradeAnswer();
+        generateNumber(requiredDigits);
     }
+
 }
