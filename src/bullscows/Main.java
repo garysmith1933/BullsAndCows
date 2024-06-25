@@ -5,12 +5,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-    public static String[] answer = {"4", "1", "7", "5"};
-    public static int cowCount = 0;
-    public static int bullCount = 0;
+    public static String[] answer;
+    public static int requiredDigits;
 
-
-    public static void checkDigits(String userGuess) {
+    public static int[] checkDigits(String userGuess) {
+        int cowCount = 0;
+        int bullCount = 0;
         for (int i = 0; i < userGuess.length(); i++) {
             String num = String.valueOf(userGuess.charAt(i));
 
@@ -22,6 +22,8 @@ public class Main {
                 cowCount += 1;
             }
         }
+
+        return new int[]{bullCount, cowCount};
     }
 
     public static boolean isCow(String numString) {
@@ -35,29 +37,35 @@ public class Main {
         return false;
     }
 
-    public static void gradeAnswer() {
+    public static boolean gradeAnswer(int[] scores) {
+        int bullCount = scores[0];
+        int cowCount = scores[1];
 
-        String answerString = String.join("", answer); // only works on arrays of strings
-        System.out.println(answerString);
+        if (bullCount == requiredDigits) {
+            System.out.println("Grade " + bullCount + " bulls");
+            return true;
+        }
 
-        if (cowCount == 0 && bullCount == 0) {
-            System.out.println("Grade: None. The secret code is " + answerString + ".");
+        else if (cowCount == 0 && bullCount == 0) {
+            System.out.println("Grade: None.");
         }
 
         else if (bullCount > 0 && cowCount == 0) {
-            System.out.println("Grade " + bullCount + " bull(s). The secret code is " + answerString + ".");
+            System.out.println("Grade " + bullCount + " bull(s).");
         }
 
         else if (cowCount > 0 && bullCount == 0){
-            System.out.println("Grade " + cowCount + " cow(s). The secret code is " + answerString + ".");
+            System.out.println("Grade " + cowCount + " cow(s).");
         }
 
         else {
-            System.out.println("Grade " + bullCount + " bull(s) and " + cowCount + " cow(s). The secret code is " + answerString + ".");
+            System.out.println("Grade " + bullCount + " bull(s) and " + cowCount + " cow(s).");
         }
+
+        return false;
     }
 
-    public static void generateNumber(int requiredDigits) {
+    public static String generateNumString(int requiredDigits) {
 
         StringBuilder numString = new StringBuilder();
         HashSet<Integer> numSeen = new HashSet<>();
@@ -76,21 +84,44 @@ public class Main {
             numSeen.add(randomNum);
         }
 
-        System.out.println(numString);
+        return numString.toString();
+    }
+
+    public static void playGame() {
+        int turn = 1;
+
+        while (true) {
+            System.out.println("Turn " + turn);
+            Scanner scanner = new Scanner(System.in);
+            String userGuess = scanner.nextLine();
+
+            int[] score = checkDigits(userGuess);
+
+            if (gradeAnswer(score)) {
+                System.out.println("Congratulations! You guessed the secret code!");
+                break;
+            }
+
+            turn += 1;
+        }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//      String userGuess = scanner.nextLine();
-        int requiredDigits = scanner.nextInt();
+
+        System.out.println("Please, enter the secret code's length ");
+        requiredDigits = scanner.nextInt();
+        scanner.nextLine();
+        scanner.close();
 
         if (requiredDigits > 10) {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
+            return;
         }
 
-        else {
-            generateNumber(requiredDigits);
-        }
+        System.out.println("Okay, let's start a game!");
+        answer = generateNumString(requiredDigits).split("");
 
+        playGame();
     }
 }
