@@ -114,7 +114,7 @@ public class Main {
         scanner.nextLine();
         scanner.close();
 
-        if (requiredDigits > 10) {
+        if (requiredDigits > 36) {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
             return;
         }
