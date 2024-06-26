@@ -114,6 +114,11 @@ public class Main {
         scanner.nextLine();
         scanner.close();
 
+        System.out.println("Please Input the number of possible symbols in the code: ");
+        int symbolsAllowed = scanner.nextInt();
+        scanner.nextLine();
+        scanner.close();
+
         if (requiredDigits > 36) {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
             return;
