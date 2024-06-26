@@ -1,5 +1,6 @@
 package bullscows;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Scanner;
@@ -109,15 +110,22 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please, enter the secret code's length ");
+        System.out.println("Please, enter the secret code's length: ");
         requiredDigits = scanner.nextInt();
         scanner.nextLine();
-        scanner.close();
 
         System.out.println("Please Input the number of possible symbols in the code: ");
         int symbolsAllowed = scanner.nextInt();
         scanner.nextLine();
         scanner.close();
+
+        //create error when symbols allowed is greater than required digits
+
+
+        String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+                "p","q","r","s","t","u","v","w","x","y","z"};
+
+        String[] lettersAllowed = Arrays.copyOfRange(letters, 0, symbolsAllowed - 10); // will be passed into generate numString method
 
         if (requiredDigits > 36) {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
@@ -126,6 +134,8 @@ public class Main {
 
         System.out.println("Okay, let's start a game!");
         answer = generateNumString(requiredDigits).split("");
+
+        // need to print the secret code with starts
 
         playGame();
     }
