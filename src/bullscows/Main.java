@@ -114,14 +114,23 @@ public class Main {
         requiredDigits = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Please Input the number of possible symbols in the code: ");
-        int symbolsAllowed = scanner.nextInt();
-        scanner.nextLine();
-        scanner.close();
+        int symbolsAllowed;
 
-        //create error when symbols allowed is greater than required digits
+        while (true) {
+            System.out.println("Please Input the number of possible symbols in the code: ");
+            symbolsAllowed = scanner.nextInt();
+            scanner.nextLine();
 
-        //create error when symbols allowed is greater than required digits
+            if (requiredDigits >= symbolsAllowed) {
+                break;
+            }
+
+            else {
+                System.out.println("Error: Number of symbols must be greater than or equal to secret code's length");
+            }
+        }
+
+
         String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
         String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
                 "p","q","r","s","t","u","v","w","x","y","z"};
