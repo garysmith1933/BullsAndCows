@@ -66,23 +66,23 @@ public class Main {
         return false;
     }
 
+    //make symbols allowed a global variable, requiredDigits is not necesssary here, need to rework this method to work with options array
     public static String generateAnswer(int requiredDigits, int symbolsAllowed, String[] options) { // need to refactor
-
         StringBuilder numString = new StringBuilder();
         HashSet<Integer> numSeen = new HashSet<>();
 
-        int max = 10;
+        int max = options.length; // will need to choose from 1 to length of options cause we cant pick an index thats not there.
         int min = 1;
 
         while (numString.length() != requiredDigits) {
-            int randomNum = (int) (Math.random() * (max - min) + min);
+            int idx = (int) (Math.random() * (max - min) + min);
 
-            if (numString.isEmpty() && randomNum == 0 || numSeen.contains(randomNum)){ //
+            if (numSeen.contains(idx)) { //
                 continue;
             }
 
-            numString.append(randomNum);
-            numSeen.add(randomNum);
+            numString.append(options[idx - 1]);
+            numSeen.add(idx); //adds the idx to the set to keep track of it was used
         }
 
         return numString.toString();
@@ -131,7 +131,7 @@ public class Main {
             symbolsAllowed = scanner.nextInt();
             scanner.nextLine();
 
-            if (requiredDigits >= symbolsAllowed) {
+            if (requiredDigits <= symbolsAllowed) {
                 break;
             }
 
@@ -140,7 +140,7 @@ public class Main {
             }
         }
 
-        scanner.close();
+        System.out.println("end");
 
         String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
         String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
@@ -151,20 +151,22 @@ public class Main {
 
         // if the symbols > 10, combine the nums and letters
         if (symbolsAllowed > 10) {
+            System.out.println("alpha");
             lettersAllowed = Arrays.copyOfRange(letters, 0, (symbolsAllowed - 10));
             String[] alphaNums = new String[nums.length + lettersAllowed.length];
 
             System.arraycopy(nums, 0, alphaNums, 0, nums.length);
-            System.arraycopy(letters, 0, alphaNums, 0, lettersAllowed.length);
-            System.out.println(alphaNums);
+            System.arraycopy(letters, 0, alphaNums, nums.length, lettersAllowed.length);
+            System.out.println(Arrays.toString(alphaNums));
 
-            //pass alphanums to generate string
             answer = generateAnswer(requiredDigits, symbolsAllowed, alphaNums).split("");
+            System.out.println(answer);
         }
 
         // proceed with nums
         else {
             answer = generateAnswer(requiredDigits, symbolsAllowed, nums).split("");
+            System.out.println(answer);
         }
 
         System.out.println("Okay, let's start a game!");
