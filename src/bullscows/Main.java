@@ -66,12 +66,12 @@ public class Main {
         return false;
     }
 
-    //make symbols allowed a global variable, requiredDigits is not necesssary here, need to rework this method to work with options array
-    public static String generateAnswer(int requiredDigits, int symbolsAllowed, String[] options) { // need to refactor
+
+    public static String generateAnswer(String[] options) {
         StringBuilder numString = new StringBuilder();
         HashSet<Integer> numSeen = new HashSet<>();
 
-        int max = options.length; // will need to choose from 1 to length of options cause we cant pick an index thats not there.
+        int max = options.length;
         int min = 1;
 
         while (numString.length() != requiredDigits) {
@@ -92,7 +92,7 @@ public class Main {
         int turn = 1;
 
         while (true) {
-            System.out.println("Turn " + turn);
+            System.out.println("Turn: " + turn);
             Scanner scanner = new Scanner(System.in);
             String userGuess = scanner.nextLine();
 
@@ -140,18 +140,16 @@ public class Main {
             }
         }
 
-        System.out.println("end");
-
         String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
         String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
                 "p","q","r","s","t","u","v","w","x","y","z"};
 
-        //letters should only be allowed when symbols are greater than 10 - is this true?
         String[] lettersAllowed;
+        StringBuilder secretCodeSign = new StringBuilder();
+        secretCodeSign.append("*".repeat(Math.max(0, requiredDigits)));
 
         // if the symbols > 10, combine the nums and letters
-        if (symbolsAllowed > 10) {
-            System.out.println("alpha");
+        if (symbolsAllowed > 10) {;
             lettersAllowed = Arrays.copyOfRange(letters, 0, (symbolsAllowed - 10));
             String[] alphaNums = new String[nums.length + lettersAllowed.length];
 
@@ -159,14 +157,13 @@ public class Main {
             System.arraycopy(letters, 0, alphaNums, nums.length, lettersAllowed.length);
             System.out.println(Arrays.toString(alphaNums));
 
-            answer = generateAnswer(requiredDigits, symbolsAllowed, alphaNums).split("");
-            System.out.println(answer);
+            answer = generateAnswer(alphaNums).split("");
+            System.out.println("The secret code is prepared: " + secretCodeSign +  " (0-9), (" + letters[0] + "-" + letters[(symbolsAllowed - 10) - 1] +").");
         }
 
-        // proceed with nums
         else {
-            answer = generateAnswer(requiredDigits, symbolsAllowed, nums).split("");
-            System.out.println(answer);
+            answer = generateAnswer(nums).split("");
+            System.out.println("The secret code is prepared: " + secretCodeSign +  " (0-9)");
         }
 
         System.out.println("Okay, let's start a game!");
