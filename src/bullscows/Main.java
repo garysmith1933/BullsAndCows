@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
     public static String[] answer;
     public static int requiredDigits;
+    public static int symbolsAllowed;
 
     public static int[] checkDigits(String userGuess) {
         int cowCount = 0;
@@ -77,7 +78,7 @@ public class Main {
         while (numString.length() != requiredDigits) {
             int idx = (int) (Math.random() * (max - min) + min);
 
-            if (numSeen.contains(idx)) { //
+            if (numSeen.contains(idx)) {
                 continue;
             }
 
@@ -110,34 +111,39 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("Please, enter the secret code's length: ");
-            requiredDigits = scanner.nextInt();
-            scanner.nextLine();
-
-            if (requiredDigits < 36) {
-                break;
-            }
-
-            else {
-                System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
-            }
+        System.out.println("Please, enter the secret code's length: ");
+        try {
+            requiredDigits = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Error:  " + requiredDigits + "isn't a valid number");
         }
 
-        int symbolsAllowed;
+        if (requiredDigits == 0) {
+            System.out.println("Error: Secret code length cannot be zero");
+            return;
+        }
 
-        while (true) {
-            System.out.println("Please Input the number of possible symbols in the code: ");
-            symbolsAllowed = scanner.nextInt();
-            scanner.nextLine();
+        if (requiredDigits > 36) {
+            System.out.println("Error: maximum number of possible digits in the code is 36 (0-9, a-z).");
+            return;
+        }
 
-            if (requiredDigits <= symbolsAllowed) {
-                break;
-            }
+        System.out.println("Please Input the number of possible symbols in the code: ");
 
-            else {
-                System.out.println("Error: Number of symbols must be greater than or equal to secret code's length");
-            }
+        try {
+            symbolsAllowed = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Error:  " + requiredDigits + "isn't a valid number");
+        }
+
+        if (requiredDigits > symbolsAllowed) {
+            System.out.println("Error: Number of symbols must be greater than or equal to secret code's length");
+            return;
+        }
+
+        if (symbolsAllowed > 36) {
+            System.out.println("Error: maximum number of possible symbols in the code is 36 (0-9, a-z).");
+            return;
         }
 
         String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
