@@ -110,9 +110,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please, enter the secret code's length: ");
-        requiredDigits = scanner.nextInt();
-        scanner.nextLine();
+        while (true) {
+            System.out.println("Please, enter the secret code's length: ");
+            requiredDigits = scanner.nextInt();
+            scanner.nextLine();
+
+            if (requiredDigits < 36) {
+                break;
+            }
+
+            else {
+                System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
+            }
+        }
 
         int symbolsAllowed;
 
@@ -152,15 +162,9 @@ public class Main {
             answer = generateAnswer(requiredDigits, symbolsAllowed, alphaNums).split("");
         }
 
-
         // proceed with nums
         else {
             answer = generateAnswer(requiredDigits, symbolsAllowed, nums).split("");
-        }
-
-        if (requiredDigits > 36) {
-            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
-            return;
         }
 
         System.out.println("Okay, let's start a game!");
