@@ -121,12 +121,19 @@ public class Main {
 
         //create error when symbols allowed is greater than required digits
 
-
+        //create error when symbols allowed is greater than required digits
+        String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
         String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
                 "p","q","r","s","t","u","v","w","x","y","z"};
 
-        String[] lettersAllowed = Arrays.copyOfRange(letters, 0, symbolsAllowed - 10); // will be passed into generate numString method
+        String[] lettersAllowed = Arrays.copyOfRange(letters, 0, symbolsAllowed - 10); //error is here, cant
+        // will be passed into generated
 
+        String[] alphaNums = new String[nums.length + lettersAllowed.length];
+
+        System.arraycopy(nums, 0, alphaNums, 0, nums.length);
+        System.arraycopy(letters, 0, alphaNums, 0, lettersAllowed.length);
+        System.out.println(alphaNums);
         if (requiredDigits > 36) {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
             return;
