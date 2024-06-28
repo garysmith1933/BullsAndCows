@@ -66,7 +66,7 @@ public class Main {
         return false;
     }
 
-    public static String generateNumString(int requiredDigits) {
+    public static String generateAnswer(int requiredDigits) {
 
         StringBuilder numString = new StringBuilder();
         HashSet<Integer> numSeen = new HashSet<>();
@@ -130,29 +130,40 @@ public class Main {
             }
         }
 
+        scanner.close();
 
         String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
         String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
                 "p","q","r","s","t","u","v","w","x","y","z"};
 
-        String[] lettersAllowed = Arrays.copyOfRange(letters, 0, symbolsAllowed - 10); //error is here, cant
-        // will be passed into generated
+        //letters should only be allowed when symbols are greater than 10 - is this true?
+        String[] lettersAllowed;
 
-        String[] alphaNums = new String[nums.length + lettersAllowed.length];
+        // if the symbols > 10, combine the nums and letters
+        if (symbolsAllowed > 10) {
+            lettersAllowed = Arrays.copyOfRange(letters, 0, (symbolsAllowed - 10));
+            String[] alphaNums = new String[nums.length + lettersAllowed.length];
 
-        System.arraycopy(nums, 0, alphaNums, 0, nums.length);
-        System.arraycopy(letters, 0, alphaNums, 0, lettersAllowed.length);
-        System.out.println(alphaNums);
+            System.arraycopy(nums, 0, alphaNums, 0, nums.length);
+            System.arraycopy(letters, 0, alphaNums, 0, lettersAllowed.length);
+            System.out.println(alphaNums);
+
+            //pass alphanums to generate string
+            answer = generateAnswer(alphaNums).split("");
+        }
+
+
+        // proceed with nums
+        else {
+            answer = generateAnswer(nums).split("");
+        }
+
         if (requiredDigits > 36) {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
             return;
         }
 
         System.out.println("Okay, let's start a game!");
-        answer = generateNumString(requiredDigits).split("");
-
-        // need to print the secret code with starts
-
         playGame();
     }
 }
