@@ -66,7 +66,7 @@ public class Main {
         return false;
     }
 
-    public static String generateAnswer(int requiredDigits) {
+    public static String generateAnswer(int requiredDigits, int symbolsAllowed, String[] options) { // need to refactor
 
         StringBuilder numString = new StringBuilder();
         HashSet<Integer> numSeen = new HashSet<>();
@@ -149,13 +149,13 @@ public class Main {
             System.out.println(alphaNums);
 
             //pass alphanums to generate string
-            answer = generateAnswer(alphaNums).split("");
+            answer = generateAnswer(requiredDigits, symbolsAllowed, alphaNums).split("");
         }
 
 
         // proceed with nums
         else {
-            answer = generateAnswer(nums).split("");
+            answer = generateAnswer(requiredDigits, symbolsAllowed, nums).split("");
         }
 
         if (requiredDigits > 36) {
