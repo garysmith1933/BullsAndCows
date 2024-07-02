@@ -2,9 +2,7 @@
 
 ## How It's Made:
 
-**Tech used: Java
-
-This is a console application project from www.Hyperskill.org.
+This is a **Java** console application project from www.Hyperskill.org.
 
 The application is a game where the user will try to guess the secret code. The user has the ability to select the length of the secret code and the ability to determine rather or not to use only numbers for the code, or both numbers and letters. 
 
