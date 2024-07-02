@@ -2,7 +2,7 @@
 
 ## How It's Made:
 
-**Tech used:Java
+**Tech used: Java
 
 This is a console application project from www.Hyperskill.org.
 
