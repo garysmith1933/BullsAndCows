@@ -15,5 +15,5 @@ When the application runs, the user will be prompted to enter the length of the 
 
 • I also learned how to implement error handling. When converting the user input into a number you need to be able to check if it is a number and handle the case when it is not. Best way to do it is to wrap the input in a try-catch block and handle the error as a NumberFormatException. 
 
-• Unlike Python and Javascript, Java does not have a very method to concat arrays. I learned that one way arrays can be combined is to create a new array and initalizing the length of the new array to be the combined length of the 2 arrays I want to join. Then I was able to use System.arraycopy() to append the values of each array to the new one.
+• Unlike Python and Javascript, Java does not have a simple method to concat arrays. I learned that one way arrays can be combined is to create a new array and initalizing the length of the new array to be the combined length of the 2 arrays I want to join. Then I was able to use System.arraycopy() to append the values of each array to the new one.
 
