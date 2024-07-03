@@ -14,3 +14,6 @@ When the application runs, the user will be prompted to enter the length of the 
 • When asking for an integer input using scanner.nextInt() does not consume the line, meaning that any additional logging or input will be put in the same line. If you want the integer to only be on that line and then proceed to the next, the best way do it is to convert the string input into an integer using Integer.parseInt(scanner.nextLine()).
 
 • I also learned how to implement error handling. When converting the user input into a number you need to be able to check if it is a number and handle the case when it is not. Best way to do it is to wrap the input in a try-catch block and handle the error as a NumberFormatException. 
+
+• Unlike Python and Javascript, Java does not have a very method to concat arrays. I learned that one way arrays can be combined is to create a new array and initalizing the length of the new array to be the combined length of the 2 arrays I want to join. Then I was able to use System.arraycopy() to append the values of each array to the new one.
+
