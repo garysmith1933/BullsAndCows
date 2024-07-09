@@ -6,7 +6,9 @@ This is a **Java** console application project from www.Hyperskill.org.
 
 The application is a game where the user will try to guess the secret code. The user has the ability to select the length of the secret code and the ability to determine rather or not to use only numbers for the code, or both numbers and letters. 
 
-When the application runs, the user will be prompted to enter the length of the secret code, followed by how many symbols, in order to determine the difficulty. If the symbols are 10 or less the secret code will only include numbers from 0-9. If the symbols are more than 10, letters will start to be included. The more symbols allowed for the code, the more letters that are potentially allowed in the secret code up to 36 (10 numbers, 26 letters).
+When the application runs, the user will be prompted to enter the length of the secret code, followed by how many symbols, in order to determine the difficulty. If the symbols are 10 or less the secret code will only include numbers from 0-9. If the symbols are more than 10, letters will start to be included. The more symbols allowed for the code, the more letters that are potentially allowed in the secret code up to 36 (10 numbers, 26 letters). 
+
+**Generating the secret code**: The general idea here was to create a method that will take a array of potential letters and numbers that will be part of the secret code. In this method, I choose to use Math.random() to randomly get the index of a letter/number from the array to add to the secret code. I did not want to have duplicate values in the secret code, so to prevent that I included a set that kept track of the index of letter/numbers that are already in the code. If it was already in the set, the program would just choose another until we have one that is not in the set. Then, the letter/number would be added to the secret code. This went on until the length of the secret code is equal to the number of what the user has specified. 
 
 *will update more soon*
 
