@@ -10,9 +10,7 @@ When the application runs, the user will be prompted to enter the length of the 
 
 **Generating the secret code**: The general idea here was to create a method (generateAnswer) that will take a array of potential letters and numbers that will be part of the secret code, build the secret code randomly, and return the secret code for the game. In this method, I choose to use Math.random() to randomly get the index of a letter/number from the array to add to the secret code. I did not want to have duplicate values in the secret code, so to prevent that I included a set that kept track of the index of letter/numbers that are already in the code. If it was already in the set, the program would just choose another until we have one that is not in the set. Then, the letter/number would be added to the secret code. This went on until the length of the secret code is equal to the number of what the user has specified. 
 
-
-
-*will update more soon*
+**The Game**: After the secret code is generated, the game will start. The user will prompted to take guess the secret code until the user has correctly guessed the secret code. I created a method checkDigits that will go over the user input and compare each digit to the secret code. If at the same index the letters/numbers are the same, the bull count is incremented. Otherwise, it will check if the letter/number is in the answer but at a different index, at that point the cow count will be incremented. After comparisons are complete, the counts are passed to the gradeAnswer method where the program will let the user know the result of their guess based on the counts, if the bull count is equal to length of the secret code, the user correctly guessed to code and the game will end!
 
 ## Lessons Learned:
 • When asking for an integer input using scanner.nextInt() does not consume the line, meaning that any additional logging or input will be put in the same line. If you want the integer to only be on that line and then proceed to the next, the best way do it is to convert the string input into an integer using Integer.parseInt(scanner.nextLine()).
